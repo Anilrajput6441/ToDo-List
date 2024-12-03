@@ -5,7 +5,7 @@ import TaskCard from './TaskCard.jsx';
 
 const ToDoComponent = () => {
    const [tigger,setTigger]=useState(0);
-   const [data,setData] = useState([])
+   const [data,setData] = useState([]);
     const addData=()=>{
       const task=document.getElementById("task").value;
       const Priority=document.getElementById("Priority").value;
@@ -27,22 +27,43 @@ const ToDoComponent = () => {
 
 
     }
-    const fetchdata = () =>{
-        console.log("fetch data called")
+    const fetchData = () => {
+        console.log("fetch data called");
+    
+        // Check if 'task' data is available in localStorage
         if (localStorage.getItem("task")) {
-            const taskarray = JSON.parse(localStorage.getItem("task"));
-            setData(taskarray);
-            
+            const taskArray = JSON.parse(localStorage.getItem("task"));
+    
+            // Check if taskArray is a valid array
+            if (Array.isArray(taskArray)) {
+                // Log fetched data
+                console.log("Fetched tasks:", taskArray);
+    
+                  // Sort the tasks by priority (convert priority to number for correct sorting)
+                const sortedTasks = taskArray.sort((a, b) => {
+                    const priorityA = parseInt(a[1], 10);  // Convert priority to number
+                    const priorityB = parseInt(b[1], 10);  // Convert priority to number
+                    return priorityA - priorityB;  // Sort by priority
+                    
+            });
+                setData(sortedTasks);
+    
+                // Log the sorted tasks to verify
+                console.log("Sorted tasks by priority:", sortedTasks);
+    
+                // Set the sorted tasks to state
+                
+            } else {
+                console.log("Invalid data format in localStorage.");
+            }
         } else {
-
             setData([]);
-            
         }
-        console.log(data)
-    }
+    };
+    
     
     useEffect(()=>{
-        fetchdata();
+        fetchData();
 
     },[tigger])
   return (
@@ -57,11 +78,11 @@ const ToDoComponent = () => {
               <option value="2">2</option>
               <option value="3">3</option>
           </select>
-          <div className="additionholder  bg-[#DC4D01] h-[7vmin] w-[22%] md:w-[20%]  text-[#fff] " onClick={()=>
+          <div className="additionholder  bg-[#6b44ea] h-[7vmin] w-[22%] md:w-[20%]  text-white  hover:bg-opacity-50 hover:text-[#5D3EEC]" onClick={()=>
                 {
                     addData()
                 }}>
-            <p className='text-center mt-1'>
+            <p className='text-center  flex-row mt-2.5'>
             Add</p>
               
           </div>
@@ -70,7 +91,9 @@ const ToDoComponent = () => {
       {data.length>0?data.map((val,ind)=>( <TaskCard  task={val[0]} priority={val[1]}/> ) ):<div></div>}
       </div>
       <div className="Buttonholder">
-        <button className='bg-[#87CEEB] p-2 mt-3 ml-3' onClick={()=>{Resetlist(); setTigger(!tigger); document.getElementById("task").value=""}}>Clear All</button>
+          
+        <button className='bg-[#87CEEB] p-2 mt-3 ml-3 hover:bg-opacity-60' onClick={()=>{Resetlist(); setTigger(!tigger); document.getElementById("task").value=""}}>Clear All</button>
+        
       </div>
       </div>
       </>

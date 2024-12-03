@@ -5,7 +5,7 @@ import TaskCompleted from './Components/TaskCompleted'
 const App = () => {
   return (
     <>
-    <div className="holder flex flex-wrap bg-[#630330] text-[#fff]">
+    <div className='holder flex flex-wrap bg-[#e7e4f6] text-[#ffff]'>
     <div className="leftComponent w-[100vw] md:w-[50vw] h-[40vh]  md:h-[100vh]">
     <ToDoComponent/>
     </div>
