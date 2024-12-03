@@ -5,3 +5,5 @@
 textarea:focus, input:focus,select:focus{
     outline: none;
   }
+
+  body{ background-color: #630330}

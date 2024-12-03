@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Addtask from '../utils/AddTask.js';
 import Resetlist from '../utils/Resetlist.js';
 import TaskCard from './TaskCard.jsx';
+import { useContext } from 'react';
+import UserContext from '../utils/UserContext.js';
 
 const ToDoComponent = () => {
    const [tigger,setTigger]=useState(0);
    const [data,setData] = useState([]);
+   const {globalTigger,setglobalTigger} = useContext(UserContext);
+   console.log("global tigger is : " , globalTigger)
     const addData=()=>{
       const task=document.getElementById("task").value;
       const Priority=document.getElementById("Priority").value;
@@ -22,6 +26,7 @@ const ToDoComponent = () => {
         //     setTigger(0);
         // }
         setTigger(!tigger);
+        setglobalTigger(!globalTigger);
         
       }
 
@@ -35,27 +40,28 @@ const ToDoComponent = () => {
             const taskArray = JSON.parse(localStorage.getItem("task"));
     
             // Check if taskArray is a valid array
-            if (Array.isArray(taskArray)) {
-                // Log fetched data
-                console.log("Fetched tasks:", taskArray);
+            // if (Array.isArray(taskArray)) {
+            //     // Log fetched data
+            //     console.log("Fetched tasks:", taskArray);
     
-                  // Sort the tasks by priority (convert priority to number for correct sorting)
-                const sortedTasks = taskArray.sort((a, b) => {
-                    const priorityA = parseInt(a[1], 10);  // Convert priority to number
-                    const priorityB = parseInt(b[1], 10);  // Convert priority to number
-                    return priorityA - priorityB;  // Sort by priority
+            //       // Sort the tasks by priority (convert priority to number for correct sorting)
+            //     const sortedTasks = taskArray.sort((a, b) => {
+            //         const priorityA = parseInt(a[1], 10);  // Convert priority to number
+            //         const priorityB = parseInt(b[1], 10);  // Convert priority to number
+            //         return priorityA - priorityB;  // Sort by priority
                     
-            });
-                setData(sortedTasks);
+            // });
+            //     setData(sortedTasks);
     
-                // Log the sorted tasks to verify
-                console.log("Sorted tasks by priority:", sortedTasks);
+            //     // Log the sorted tasks to verify
+            //     console.log("Sorted tasks by priority:", sortedTasks);
     
-                // Set the sorted tasks to state
+            //     // Set the sorted tasks to state
                 
-            } else {
-                console.log("Invalid data format in localStorage.");
-            }
+            // } else {
+            //     console.log("Invalid data format in localStorage.");
+            // }
+            setData(taskArray)
         } else {
             setData([]);
         }
@@ -65,7 +71,7 @@ const ToDoComponent = () => {
     useEffect(()=>{
         fetchData();
 
-    },[tigger])
+    },[tigger,globalTigger])
   return (
     <>
     {console.log(data)}
@@ -78,21 +84,22 @@ const ToDoComponent = () => {
               <option value="2">2</option>
               <option value="3">3</option>
           </select>
-          <div className="additionholder  bg-[#6b44ea] h-[7vmin] w-[22%] md:w-[20%]  text-white  hover:bg-opacity-50 hover:text-[#5D3EEC]" onClick={()=>
+          <div className="additionholder  bg-[#3d18c0] h-[7.2vmin] w-[22%] md:w-[20%]  text-white   " onClick={()=>
                 {
                     addData()
+                    document.getElementById("task").value="";
                 }}>
-            <p className='text-center  flex-row mt-2.5'>
+            <p className='text-center  mt-1 '>
             Add</p>
               
           </div>
       </div>
       <div className="Taskcardholder flex flex-col gap-y-3 mt-3 ml-3">
-      {data.length>0?data.map((val,ind)=>( <TaskCard  task={val[0]} priority={val[1]}/> ) ):<div></div>}
+      {data.length>0?data.sort((a,b)=>a[1]-b[1]).map((val,ind)=>( <TaskCard  task={val[0]} priority={val[1]}/> ) ):<div></div>}
       </div>
       <div className="Buttonholder">
           
-        <button className='bg-[#87CEEB] p-2 mt-3 ml-3 hover:bg-opacity-60' onClick={()=>{Resetlist(); setTigger(!tigger); document.getElementById("task").value=""}}>Clear All</button>
+        <button className='bg-[#fa5339] p-2 mt-3 ml-3 ' onClick={()=>{Resetlist(); setTigger(!tigger); document.getElementById("task").value=""}}>Clear All</button>
         
       </div>
       </div>

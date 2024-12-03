@@ -1,6 +1,19 @@
 import React from 'react'
+import removeTask from '../utils/RemoveTask'
+import UserContext from '../utils/UserContext'
+import { useContext } from 'react'
 
 const TaskCard = (props) => {
+    const {globalTigger,setglobalTigger} = useContext(UserContext);
+    console.log("from task card gt: ",globalTigger)
+    const removeTaskCard = (taskname) => {
+       
+       const n = removeTask(taskname);
+        setglobalTigger(!globalTigger);
+       return n; 
+    }
+
+
   return (
     <div className="card w-[92%] bg-[#fff] h-[12vmin] flex">
     <div className="completeholder w-[10%]  h-full flex justify-center items-center">
@@ -18,7 +31,7 @@ const TaskCard = (props) => {
         </div>
     </div>
     <div className="removeholder w-[8%] mt-2 mr-1 h-full p-1">
-        <img src="delete.png" className='max-w-full max-h-full object-contain' alt="" />
+        <img src="delete.png" className='max-w-full max-h-full object-contain' alt="" onClick={()=>{removeTaskCard(props.task)}}/>
     </div>
 
 
