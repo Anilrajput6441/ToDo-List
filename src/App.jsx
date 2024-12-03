@@ -6,10 +6,11 @@ import { useState } from 'react'
 
 const App = () => {
   const [globalTigger,setglobalTigger] = useState(0);
+  const [globalTiggerCompleted,setglobalTiggerCompleted] = useState(0);
  
   return (
     <>
-    <UserContext.Provider value={{globalTigger:globalTigger,setglobalTigger}}>
+    <UserContext.Provider value={{globalTigger:globalTigger,setglobalTigger,globalTiggerCompleted:globalTiggerCompleted,setglobalTiggerCompleted}}>
     <div className='holder flex flex-wrap bg-purple text-[#ffff]'>
     <div className="leftComponent w-[100vw] md:w-[50vw] ">
     <ToDoComponent/>

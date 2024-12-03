@@ -1,9 +1,9 @@
 
 
-const removeTask = (taskname) => {
+const removeTaskCompleted = (taskname) => {
     let taskArray=[];
     
-         taskArray = JSON.parse(localStorage.getItem("task"));
+         taskArray = JSON.parse(localStorage.getItem("taskCompleted"));
     
     let newTaskArray = [];
     for (let index = 0; index < taskArray.length; index++) {
@@ -13,11 +13,11 @@ const removeTask = (taskname) => {
         
     }
     
-    localStorage.setItem("task",JSON.stringify(newTaskArray))
+    localStorage.setItem("taskCompleted",JSON.stringify(newTaskArray))
    
     return newTaskArray.length;
     }
     
 
 
-export default removeTask;
+export default removeTaskCompleted;

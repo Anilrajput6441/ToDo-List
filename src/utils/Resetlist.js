@@ -1,6 +1,10 @@
 import ToDoComponent from "../Components/ToDoComponent";
+import UserContext from "./UserContext";
+import { useContext } from "react";
+
 const Resetlist=()=>{
-    if (localStorage.getItem("task")) {
+    // const {globalTiggerCompleted,setglobalTiggerCompleted} = useContext(UserContext)
+    if (localStorage.getItem("task")|| localStorage.getItem("taskCompleted")) {
        localStorage.clear()
        
     // console.log("inside reset list")
@@ -8,5 +12,6 @@ const Resetlist=()=>{
     } 
     
 }
+
 export default Resetlist;
 

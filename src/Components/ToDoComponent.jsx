@@ -9,6 +9,7 @@ const ToDoComponent = () => {
    const [tigger,setTigger]=useState(0);
    const [data,setData] = useState([]);
    const {globalTigger,setglobalTigger} = useContext(UserContext);
+   const {globalTiggerCompleted,setglobalTiggerCompleted} = useContext(UserContext);
    console.log("global tigger is : " , globalTigger)
     const addData=()=>{
       const task=document.getElementById("task").value;
@@ -99,7 +100,7 @@ const ToDoComponent = () => {
       </div>
       <div className="Buttonholder">
           
-        <button className='bg-[#fa5339] p-2 mt-3 ml-3 ' onClick={()=>{Resetlist(); setTigger(!tigger); document.getElementById("task").value=""}}>Clear All</button>
+        <button className='bg-[#fa5339] p-2 mt-3 ml-3 ' onClick={()=>{  Resetlist(); setTigger(!tigger); document.getElementById("task").value=""; setglobalTiggerCompleted(!globalTiggerCompleted);}}>Clear All</button>
         
       </div>
       </div>
