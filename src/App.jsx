@@ -21,7 +21,7 @@ const App = () => {
           <div className="leftComponent w-[100vw] md:w-[50vw] ">
             <ToDoComponent />
           </div>
-          <div className="rightComponent w-[100vw] md:w-[50vw]  md:border-l-[1px]">
+          <div className="rightComponent w-[100vw] md:w-[45vw]  md:border-l-[1px]">
             <TaskCompleted />
           </div>
         </div>
