@@ -28,15 +28,18 @@ const ToDoComponent = () => {
       });
     } else {
       let flag = false;
-      const prevArray = JSON.parse(localStorage.getItem("task"));
-      for (let i = 0; i < prevArray.length; i++) {
-        if (prevArray[i][0].toLowerCase() === task.toLowerCase()) {
-          flag = true;
-          toast.error("Task already exist ...", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
+      if (localStorage.getItem("task")) {
+        const prevArray = JSON.parse(localStorage.getItem("task"));
+        for (let i = 0; i < prevArray.length; i++) {
+          if (prevArray[i][0].toLowerCase() === task.toLowerCase()) {
+            flag = true;
+            toast.error("Task already exist ...", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          }
         }
       }
+
       if (!flag) {
         const data = {
           task,
