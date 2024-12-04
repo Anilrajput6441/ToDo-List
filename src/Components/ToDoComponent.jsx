@@ -27,20 +27,32 @@ const ToDoComponent = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
-      const data = {
-        task,
-        Priority,
-      };
-      const n = Addtask(data);
-      if (n) {
-        // if (tigger != 1) {
-        //     setTigger(1);
-        // }
-        // else{
-        //     setTigger(0);
-        // }
-        setTigger(!tigger);
-        setglobalTigger(!globalTigger);
+      let flag = false;
+      const prevArray = JSON.parse(localStorage.getItem("task"));
+      for (let i = 0; i < prevArray.length; i++) {
+        if (prevArray[i][0].toLowerCase() === task.toLowerCase()) {
+          flag = true;
+          toast.error("Task already exist ...", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      }
+      if (!flag) {
+        const data = {
+          task,
+          Priority,
+        };
+        const n = Addtask(data);
+        if (n) {
+          // if (tigger != 1) {
+          //     setTigger(1);
+          // }
+          // else{
+          //     setTigger(0);
+          // }
+          setTigger(!tigger);
+          setglobalTigger(!globalTigger);
+        }
       }
     }
   };
