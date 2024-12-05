@@ -30,7 +30,7 @@ const TaskCard = (props) => {
 
   const styleObj = {
     width: "92%",
-    
+    borderRadius: "2.5vmin"
   };
 
   return (
