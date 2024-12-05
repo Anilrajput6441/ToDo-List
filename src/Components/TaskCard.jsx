@@ -80,7 +80,7 @@ const TaskCard = (props) => {
           )}
         </div>
         <div className="textholder  pl-1 ml-1 w-[82%] ">
-          <div className="text flex items-center mt-2 lg:mt-3">
+          <div className="text flex items-center mt-2 lg:mt-4">
             <p className="text-[3.55vmin] lg:text-[2.75vmin] font-medium">
               {props.task}
             </p>
