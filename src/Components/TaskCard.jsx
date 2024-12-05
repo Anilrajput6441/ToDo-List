@@ -30,11 +30,12 @@ const TaskCard = (props) => {
 
   const styleObj = {
     width: "92%",
+    
   };
 
   return (
     <div className={navMap[props.priority]} style={styleObj}>
-      <div className="card w-[92%] h-[12vmin] flex">
+      <div className="card w-[92%] h-[12vmin] flex rounded-md">
         <div className="completeholder w-[10%]  h-full flex justify-center items-center">
           {props.type != "completed" && (
             <div className="container flex justify-center items-center">
